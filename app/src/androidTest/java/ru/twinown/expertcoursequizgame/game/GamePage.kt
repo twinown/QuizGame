@@ -6,12 +6,13 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import org.hamcrest.Matcher
+import ru.twinown.expertcoursequizgame.R
 
 
 //hamcrest - библиотека для проверки условий (в тестах оно типо часть эспрессо)
 //Espresso - билиотека для взаимодействия с Ui
 
-//blueprint
+
 class GamePage(
     question: String,
     choices: List<String>
@@ -28,6 +29,7 @@ class GamePage(
     //этот матчер ищет дочерний элемент , который находится внутри родительского элемента  с айди rootLayout
     // containerIdMatcher находит элементы, расположенные внутри конкретного контейнера с ID rootLayout.
     //найди элемент внутри контейнера(ЛинеарЛэйаут, констрэйт), чей родитель имеет id R.id.rootLayout
+    //всё в одном контейненре, потому вот так
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
 
     //этот матчер находит дочерний элемент , чей родитель - это LinearLayout
@@ -52,21 +54,31 @@ class GamePage(
         containerClassTypeMatcher = classTypeMatcher
     )
 
+    private val choicesUiIdList = listOf(
+        R.id.firstchoiceButton,
+        R.id.secondchoiceButton,
+        R.id.thirdchoiceButton,
+        R.id.fourthchoiceButton
+    )
     //был лист стрингов , и мы создаём список наших чойзюаев
-    private val choicesUiList = choices.map {
+    private val choicesUiList = choices.mapIndexed { index, text ->
         ChoicesUi(
-            text = it, containerIdMatcher = containerIdMatcher,
+            choicesUiIdList[index],
+            text = text,
+            containerIdMatcher = containerIdMatcher,
             containerClassTypeMatcher = classTypeMatcher
         )
     }
 
     private val checkUi = ButtonUi(
+        id = R.id.checkButton,
         textResId = R.string.check,
         colorHex = "#E84DDD",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )
     private val nextUi = ButtonUi(
+        id = R.id.nextButton,
         textResId = R.string.next,
         colorHex = "#30F8F5",
         containerIdMatcher = containerIdMatcher,
