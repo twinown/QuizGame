@@ -23,7 +23,7 @@ class QuestionUi(
         allOf(
             containerIdMatcher,
             containerClassTypeMatcher,
-            withId(R.id.qustionTextView),
+            withId(R.id.questionTextView),
             withText(text),
             isAssignableFrom(TextView::class.java)
         )
