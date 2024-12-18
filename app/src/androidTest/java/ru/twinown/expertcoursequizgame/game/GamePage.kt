@@ -55,10 +55,10 @@ class GamePage(
     )
 
     private val choicesUiIdList = listOf(
-        R.id.firstchoiceButton,
-        R.id.secondchoiceButton,
-        R.id.thirdchoiceButton,
-        R.id.fourthchoiceButton
+        R.id.firstChoiceButton,
+        R.id.secondChoiceButton,
+        R.id.thirdChoiceButton,
+        R.id.fourthChoiceButton
     )
     //был лист стрингов , и мы создаём список наших чойзюаев
     private val choicesUiList = choices.mapIndexed { index, text ->
