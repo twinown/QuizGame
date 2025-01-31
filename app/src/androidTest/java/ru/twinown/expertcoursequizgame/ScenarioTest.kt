@@ -39,7 +39,7 @@ class ScenarioTest {
     @Test
     fun caseNumber1() {
         //высокоуровневые тесты, как в фигме в тесткейсе номер1
-        gamePage.assertAskedQuestionState()
+        gamePage.assertAskedQuestionState() //инишал состояние типо,если что
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMadeState()
