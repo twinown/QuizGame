@@ -12,33 +12,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         //   setContentView(R.layout.activity_main)//отсюда доступ к контексту, который имеет доступ к дисплею
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootLayout)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         //тут происходит парсинг и созданиеActivityMainBinding
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.rootLayout) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         //анонимный объект
-        val viewModel:GameViewModel = GameViewModel(object: GameRepository{
-            override fun questionAndChoices(): QuestionAndChoices {
-                TODO("Not yet implemented")
-            }
-
-            override fun saveUserChoice(index: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun check(): CorrectAndUserChoiceIndexes {
-                TODO("Not yet implemented")
-            }
-
-            override fun next() {
-                TODO("Not yet implemented")
-            }
-        })
+        val viewModel:GameViewModel = GameViewModel(GameRepository.Base())
 
         binding.firstChoiceButton.setOnClickListener {
             val uiState :GameUiState = viewModel.chooseFirst()
