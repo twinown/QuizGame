@@ -8,7 +8,7 @@ interface GameUiState {
 
     //свойства из блюпринта!!!
     //тк у нас для каждого экрана имеются состояния всех семи элементов
-    //то мы иъ пишем все в одном абстрактном классе, а не в каждом наследнике =
+    //то мы и пишем все элементы в одном абстрактном классе, а не в каждом наследнике =
     //не нарушаем DRY
     abstract class Abstract(
         private val questionText: String,
@@ -16,6 +16,7 @@ interface GameUiState {
         private val checkVisibility: Int,
         private val nextVisibility: Int
     ) : GameUiState {
+        //обновление элеиентов экрана , потому здесь биндинг
         override fun update(binding: ActivityMainBinding) = with((binding)) {
             questionTextView.text = questionText
             choicesStateList[0].update(firstChoiceButton)

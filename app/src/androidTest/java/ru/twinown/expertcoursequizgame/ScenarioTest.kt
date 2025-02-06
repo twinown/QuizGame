@@ -40,11 +40,17 @@ class ScenarioTest {
     fun caseNumber1() {
         //высокоуровневые тесты, как в фигме в тесткейсе номер1
         gamePage.assertAskedQuestionState() //инишал состояние типо,если что
+        activityScenarioRule.scenario.recreate()//пересоздание активити
+        gamePage.assertAskedQuestionState() //
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMadeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertFirstChoiceMadeState()
 
         gamePage.clickCheck()
+        gamePage.assertAnswerCheckedStateFirstIsCorrect()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertAnswerCheckedStateFirstIsCorrect()
     }
 
@@ -57,26 +63,33 @@ class ScenarioTest {
 
         //высокоуровневые тесты, как в фигме в тесткейсе номер2
         gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMadeState()
-
-
-        gamePage.clickSecondChoice()
-        gamePage.assertSecondChoiceMadeState()
-
-
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertFirstChoiceMadeState()
 
         gamePage.clickCheck()
         gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
+
+        gamePage.clickSecondChoice()
+        gamePage.assertSecondChoiceMadeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
 
         gamePage.clickNext()
-
         gamePage = GamePage(
             question = "What color is the grass?", choices = listOf(
             "green","blue","yellow","red"
         ))
         gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
+
 
     }
 }

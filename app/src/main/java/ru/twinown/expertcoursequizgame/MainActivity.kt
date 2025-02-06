@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         //   setContentView(R.layout.activity_main)//отсюда доступ к контексту, который имеет доступ к дисплею
+
         //тут происходит парсинг и созданиеActivityMainBinding
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
