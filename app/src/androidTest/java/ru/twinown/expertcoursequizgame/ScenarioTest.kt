@@ -71,15 +71,17 @@ class ScenarioTest {
         activityScenarioRule.scenario.recreate()
         gamePage.assertFirstChoiceMadeState()
 
+        gamePage.clickSecondChoice()
+        gamePage.assertSecondChoiceMadeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertSecondChoiceMadeState()
+
+
         gamePage.clickCheck()
         gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
         activityScenarioRule.scenario.recreate()
         gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
 
-        gamePage.clickSecondChoice()
-        gamePage.assertSecondChoiceMadeState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
 
         gamePage.clickNext()
         gamePage = GamePage(

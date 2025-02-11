@@ -2,8 +2,10 @@ package ru.twinown.expertcoursequizgame
 
 import android.view.View
 import ru.twinown.expertcoursequizgame.databinding.ActivityMainBinding
+import java.io.Serializable
 
-interface GameUiState {
+//он сериализуем. значит его внутренности тоже должны быть сериализуемыми
+interface GameUiState :Serializable{
     fun update(binding: ActivityMainBinding)
 
     //свойства из блюпринта!!!
