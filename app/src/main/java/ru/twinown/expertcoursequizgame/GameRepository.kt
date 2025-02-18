@@ -8,6 +8,8 @@ interface GameRepository {
     fun next()
 
     class Base(
+        private val index: IntCache,
+        private val userChoiceIndex:IntCache,
             private val list :List<QuestionAndChoices> = listOf(
             QuestionAndChoices(question = "What color is the sky?",
                 choices = listOf("blue","green","red","yellow"),
@@ -18,32 +20,30 @@ interface GameRepository {
         )
     ):GameRepository{
 
-        private var index = 0
+
         //метод отдачи данных с репы//текущих вопроса и ответов
         override fun questionAndChoices():QuestionAndChoices{
-            return list[index]
+            return list[index.read()]
         }
 
-        private var userChoiceIndex = -1
 
         //чё выбрал юзер//сохраняем это в репу
         override fun saveUserChoice(index:Int){
-            userChoiceIndex = index
+            userChoiceIndex.save(index)
         }
 
         //от репы отдаём обратно,видишь
         override fun check():CorrectAndUserChoiceIndexes{
             return CorrectAndUserChoiceIndexes(correctIndex= questionAndChoices().correctIndex,
-                userChoiceIndex = userChoiceIndex)
+                userChoiceIndex = userChoiceIndex.read())
         }
 
         override fun next(){
             //типо сбрасываем значения
-            userChoiceIndex = -1
-            if(index +1 ==list.size)
-                index = 0
-            else index++
-
+            userChoiceIndex.save(-1)
+            if(index.read() +1 ==list.size)
+                index.save(0)
+            else index.save(index.read()+1)
         }
     }
 }

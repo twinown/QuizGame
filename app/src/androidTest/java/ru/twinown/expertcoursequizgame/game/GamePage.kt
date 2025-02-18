@@ -50,7 +50,8 @@ class GamePage(
 
     //все вьюхи на блюпринте
     private val questionUi = QuestionUi(
-        text = question, containerIdMatcher = containerIdMatcher,
+        text = question,
+        containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )
 
